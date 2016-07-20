@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<!-- 导入fastclick清楚延迟 -->
+	<title>Touch</title>
+	<style type="text/css">
+		#q{
+			width: 100px;
+			height: 100px;
+			background-color: black;
+			border-radius: 100px;
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<div id="q"></div>
+	<a href="javascript:void(0);" onclick="show()">点我</a>
+	<script type="text/javascript">
+		var q=document.getElementById('q');
+		q.addEventListener('touchstart',touchstart,false);
+		q.addEventListener('touchmove',touchmove,false);
+		q.addEventListener('touchend',touchend,false);
+		var flag=false;
+		function touchstart(e){
+			flag=true;
+		}
+		function touchmove(e){
+			if(flag&&e.touches.length==1){
+				var t=e.touches[0];
+				q.style.left=t.clientX-50+'px';
+				q.style.top=t.clientY-50+'px';
+			}
+		}
+		function touchend(e){
+				e.preventDefault();
+				flag=false;
+		}
+		function show(){
+			alert('有延迟吗？');
+		}
+	</script>
+</body>
+<ml>
